@@ -30,6 +30,8 @@ namespace DataExporter
         private void btn_close_Click(object sender, EventArgs e)
         {
             Application.Exit();
+            //MessageBox.Show( bantu.GetLocalIPAddress());
+            //MessageBox.Show(auth.authID);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -44,13 +46,14 @@ namespace DataExporter
         {
             if (txt_user.Text.Length >= 2 && txt_pass.Text.Length >= 2)
             {
-                String kunci = enc.encstr(txt_user.Text + txt_pass.Text);                
-                String sql = "select a.[group],b.tipe from tUser as a INNER JOIN tGroup as b on a.username = '" + txt_user.Text + "' AND a.password like '" + kunci.Substring(0, kunci.Length - 5) + "%' and a.[group] = b.name";
-                Console.WriteLine(sql);
+                String kunci = enc.encstr(txt_user.Text + txt_pass.Text);
+                //String sql = "select a.[group],b.tipe from tUser as a INNER JOIN tGroup as b on a.username = '" + txt_user.Text + "' AND a.password like '" + kunci.Substring(0, kunci.Length - 5) + "%' and a.[group] = b.name";
+                String sql = "SELECT c.name,c.tipe from tUser as a INNER JOIN tUserGroup as b ON a.username = b.username AND a.username = '" + txt_user.Text + "' AND a.password like '" + kunci.Substring(0, kunci.Length - 5) + "%' INNER JOIN tGroup as c ON b.[group] = c.name;Select @@ROWCOUNT";
+                //Console.WriteLine(sql);
                 DataSet ds = MsSQL.dgsql(sql);
-
                 if (ds.Tables[0].Rows[0][1].ToString() == "1")
                 {
+                    auth.authID = ds.Tables[0].Rows[0][0].ToString();
                     FormAdmin fr = new FormAdmin();
                     this.Hide();
                     fr.ShowDialog();

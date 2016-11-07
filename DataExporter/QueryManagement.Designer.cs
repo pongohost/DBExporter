@@ -30,6 +30,7 @@
         {
             this.dgv_querylist = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.query_id = new System.Windows.Forms.Label();
             this.cb_query = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.in_query = new System.Windows.Forms.TextBox();
@@ -39,11 +40,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_addparam = new System.Windows.Forms.Button();
             this.flowparam = new System.Windows.Forms.FlowLayoutPanel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.cb_paramtype = new System.Windows.Forms.ComboBox();
             this.btn_save = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
@@ -51,7 +47,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_querylist)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.flowparam.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv_querylist
@@ -67,10 +62,11 @@
             this.dgv_querylist.RowHeadersVisible = false;
             this.dgv_querylist.Size = new System.Drawing.Size(218, 458);
             this.dgv_querylist.TabIndex = 0;
-            this.dgv_querylist.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_querylist_CellClick);            
+            this.dgv_querylist.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_querylist_CellClick);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.query_id);
             this.groupBox1.Controls.Add(this.cb_query);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.in_query);
@@ -85,6 +81,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Query Properties";
+            // 
+            // query_id
+            // 
+            this.query_id.AutoSize = true;
+            this.query_id.Location = new System.Drawing.Point(158, 117);
+            this.query_id.Name = "query_id";
+            this.query_id.Size = new System.Drawing.Size(21, 20);
+            this.query_id.TabIndex = 6;
+            this.query_id.Text = "id";
+            this.query_id.Visible = false;
             // 
             // cb_query
             // 
@@ -110,14 +116,14 @@
             this.in_query.Location = new System.Drawing.Point(104, 56);
             this.in_query.Multiline = true;
             this.in_query.Name = "in_query";
-            this.in_query.Size = new System.Drawing.Size(309, 54);
+            this.in_query.Size = new System.Drawing.Size(441, 54);
             this.in_query.TabIndex = 3;
             // 
             // in_query_title
             // 
             this.in_query_title.Location = new System.Drawing.Point(104, 21);
             this.in_query_title.Name = "in_query_title";
-            this.in_query_title.Size = new System.Drawing.Size(309, 26);
+            this.in_query_title.Size = new System.Drawing.Size(441, 26);
             this.in_query_title.TabIndex = 2;
             // 
             // label2
@@ -164,60 +170,10 @@
             // flowparam
             // 
             this.flowparam.AutoScroll = true;
-            this.flowparam.Controls.Add(this.label13);
-            this.flowparam.Controls.Add(this.label12);
-            this.flowparam.Controls.Add(this.label11);
-            this.flowparam.Controls.Add(this.label10);
-            this.flowparam.Controls.Add(this.label9);
             this.flowparam.Location = new System.Drawing.Point(11, 59);
             this.flowparam.Name = "flowparam";
             this.flowparam.Size = new System.Drawing.Size(534, 202);
             this.flowparam.TabIndex = 3;
-            // 
-            // label13
-            // 
-            this.label13.Location = new System.Drawing.Point(3, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(100, 20);
-            this.label13.TabIndex = 8;
-            this.label13.Text = "Type";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label12
-            // 
-            this.label12.Location = new System.Drawing.Point(109, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(160, 20);
-            this.label12.TabIndex = 9;
-            this.label12.Text = "Initial Value";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label11
-            // 
-            this.label11.Location = new System.Drawing.Point(275, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(100, 20);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "Label";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.Location = new System.Drawing.Point(381, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(101, 20);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "Param Name";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.Location = new System.Drawing.Point(488, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(33, 20);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Act";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cb_paramtype
             // 
@@ -239,6 +195,7 @@
             this.btn_save.TabIndex = 6;
             this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // btn_clear
             // 
@@ -249,6 +206,7 @@
             this.btn_clear.TabIndex = 7;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
             // btn_delete
             // 
@@ -261,6 +219,7 @@
             this.btn_delete.TabIndex = 8;
             this.btn_delete.Text = "Delete";
             this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // QueryManagement
             // 
@@ -281,7 +240,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.flowparam.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -300,13 +258,9 @@
         private System.Windows.Forms.Button btn_addparam;
         private System.Windows.Forms.ComboBox cb_paramtype;
         private System.Windows.Forms.FlowLayoutPanel flowparam;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.Button btn_clear;
         private System.Windows.Forms.Button btn_delete;
+        private System.Windows.Forms.Label query_id;
     }
 }

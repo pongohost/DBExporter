@@ -15,7 +15,7 @@ namespace DataExporter
     public partial class QueryManagement : DockContent
     {
         int urut=1;
-        LinkedList<String> linklist = new LinkedList<String>();
+        String[] listParam = new String[20];
         public Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
         public QueryManagement()
         {
@@ -28,6 +28,7 @@ namespace DataExporter
             MsSQL.setpar(config.AppSettings.Settings["dbserver"].Value, config.AppSettings.Settings["dbinit"].Value, enc2.DecryptStringAES(config.AppSettings.Settings["dbuser"].Value, "roniGanteng"), enc2.DecryptStringAES(config.AppSettings.Settings["dbpass"].Value, "roniGanteng"));
             MsSQL.setconnection();
             loadgridquerylist();
+            addParamTitle();
         }
         private void loadgridquerylist()
         {
@@ -44,8 +45,63 @@ namespace DataExporter
             addparamflow(cb_paramtype.Text,"","","");
         }
 
+        private void addParamTitle()
+        {
+            Label a = new Label()
+            {
+                BackColor = System.Drawing.SystemColors.ButtonShadow,
+                Margin = new System.Windows.Forms.Padding(0),
+                Name = "titelnama",
+                Size = new System.Drawing.Size(110, 30),
+                Text = "Type",
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+            };
+            Label b = new Label()
+            {
+                BackColor = System.Drawing.SystemColors.ButtonShadow,
+                Margin = new System.Windows.Forms.Padding(0),
+                Name = "titelnama",
+                Size = new System.Drawing.Size(160, 30),
+                Text = "Initial Value",
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+            };
+            Label c = new Label()
+            {
+                BackColor = System.Drawing.SystemColors.ButtonShadow,
+                Margin = new System.Windows.Forms.Padding(0),
+                Name = "titelnama",
+                Size = new System.Drawing.Size(115, 30),
+                Text = "Label",
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+            };
+            Label d = new Label()
+            {
+                BackColor = System.Drawing.SystemColors.ButtonShadow,
+                Margin = new System.Windows.Forms.Padding(0),
+                Name = "titelnama",
+                Size = new System.Drawing.Size(115, 30),
+                Text = "Param Name",
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+            };
+            Label e = new Label()
+            {
+                BackColor = System.Drawing.SystemColors.ButtonShadow,
+                Margin = new System.Windows.Forms.Padding(0),
+                Name = "titelnama",
+                Size = new System.Drawing.Size(33, 30),
+                Text = "Act",
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+            };
+            flowparam.Controls.Add(a);
+            flowparam.Controls.Add(b);
+            flowparam.Controls.Add(c);
+            flowparam.Controls.Add(d);
+            flowparam.Controls.Add(e);
+        }
+
         public void addparamflow(String jenis, String nilai, String label, String nama)
         {
+            bantu.addSingleEmptyArray(listParam, urut.ToString(), "Input Gagal", "Data Sudah Ada");
             Label a = new Label()
             {
                 Name = "jenis"+urut,
@@ -62,13 +118,13 @@ namespace DataExporter
             TextBox c = new TextBox()
             {
                 Size = new System.Drawing.Size(100, 26),
-                Text = nilai,
+                Text = label,
                 Name = "lbl" + urut
             };
             TextBox d = new TextBox()
             {
                 Size = new System.Drawing.Size(100, 26),
-                Text = nilai,
+                Text = nama,
                 Name = "act" + urut
             };
             Button btn = new Button()
@@ -100,6 +156,7 @@ namespace DataExporter
             ((TextBox)flowparam.Controls["lbl" + idx]).Dispose();
             ((TextBox)flowparam.Controls["act" + idx]).Dispose();
             ((Button)flowparam.Controls["btn_delete" + idx]).Dispose();
+            bantu.delSingleEmptyArray(listParam, idx, "Hapus Gagal", "Data Tidak Ditemukan");
         }
 
         private void dgv_querylist_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -110,6 +167,7 @@ namespace DataExporter
             //MessageBox.Show(ds.Tables[0].Rows[0][2].ToString());
             in_query_title.Text = ds.Tables[0].Rows[0][3].ToString();
             in_query.Text = ds.Tables[0].Rows[0][1].ToString();
+            query_id.Text = ds.Tables[0].Rows[0][0].ToString();
             if (ds.Tables[0].Rows[0][2].ToString().Equals("True"))
                 cb_query.Checked = true;
             else
@@ -117,10 +175,62 @@ namespace DataExporter
             String sql2 = "SELECT * FROM tParameter WHERE parent_id = '" + ds.Tables[0].Rows[0][0].ToString() + "'";
             DataSet ds2 = MsSQL.dgsql(sql2);
             flowparam.Controls.Clear();
+            bantu.clrSingleEmptyArray(listParam);
+            addParamTitle();
             foreach (DataRow row in ds2.Tables[0].Rows)
             {
-                addparamflow(row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString());                
+                addparamflow(row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString());                
             }
-        }        
+
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            String newparam = "";
+            Boolean separator = false;
+            for (int i = 0; i < listParam.Length; i++)
+            {
+                if (listParam[i] != null)
+                {
+                    String isi = "";
+                    if (separator == true)
+                        newparam = "{|" + newparam;
+                    
+                    isi = ((Label)flowparam.Controls["jenis" + listParam[i]]).Text.ToString();
+                    isi = isi + "|}"+((TextBox)flowparam.Controls["isi" + listParam[i]]).Text.ToString();
+                    isi = isi + "|}" + ((TextBox)flowparam.Controls["lbl" + listParam[i]]).Text.ToString();
+                    isi = isi + "|}" + ((TextBox)flowparam.Controls["act" + listParam[i]]).Text.ToString();
+
+                    newparam = isi + newparam;
+                    separator = true;
+                }
+            }
+            //MessageBox.Show(cb_group.Checked);
+            String idx = "";
+            if (query_id.Text != "id")
+                idx = ", @id =" + query_id.Text;
+            //Console.WriteLine("EXEC insertQuery @query = '" + in_query.Text + "', @aktif = " + cb_query.Checked + ", @titel = '" + in_query_title.Text + "', @param = '" + newparam + "'" + idx);
+            MsSQL.kuerisql("EXEC insertQuery @query = '" + in_query.Text + "', @aktif = " + cb_query.Checked + ", @titel = '" + in_query_title.Text + "', @param = '" + newparam + "'" + idx, "Simpan Permission", "Simpan Data Berhasil");
+            loadgridquerylist();
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            in_query_title.Text = "";
+            in_query.Text = "";
+            query_id.Text = "id";
+            flowparam.Controls.Clear();
+            bantu.clrSingleEmptyArray(listParam);
+            addParamTitle();
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            if (query_id.Text != "id")
+            {
+                MsSQL.kuerisql("DELETE from tQuery WHERE id = '" + query_id.Text + "'", "Hapus Group", "Hapus Data Berhasil");
+                loadgridquerylist();
+            }
+        }
     }
 }

@@ -38,9 +38,10 @@
             this.flowgroup = new System.Windows.Forms.FlowLayoutPanel();
             this.dgv_gQuery = new System.Windows.Forms.DataGridView();
             this.cb_group = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btn_role_save = new System.Windows.Forms.Button();
+            this.btn_role_clear = new System.Windows.Forms.Button();
+            this.btn_role_delete = new System.Windows.Forms.Button();
+            this.role_id = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_role)).BeginInit();
             this.Group.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -152,44 +153,58 @@
             this.cb_group.Text = "Active";
             this.cb_group.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_role_save
             // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(208, 432);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 30);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_role_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_role_save.Location = new System.Drawing.Point(208, 432);
+            this.btn_role_save.Name = "btn_role_save";
+            this.btn_role_save.Size = new System.Drawing.Size(75, 30);
+            this.btn_role_save.TabIndex = 4;
+            this.btn_role_save.Text = "Save";
+            this.btn_role_save.UseVisualStyleBackColor = true;
+            this.btn_role_save.Click += new System.EventHandler(this.btn_role_save_Click);
             // 
-            // button3
+            // btn_role_clear
             // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(289, 432);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 30);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Clear";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_role_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_role_clear.Location = new System.Drawing.Point(289, 432);
+            this.btn_role_clear.Name = "btn_role_clear";
+            this.btn_role_clear.Size = new System.Drawing.Size(75, 30);
+            this.btn_role_clear.TabIndex = 5;
+            this.btn_role_clear.Text = "Clear";
+            this.btn_role_clear.UseVisualStyleBackColor = true;
+            this.btn_role_clear.Click += new System.EventHandler(this.btn_role_clear_Click);
             // 
-            // button4
+            // btn_role_delete
             // 
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(705, 432);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 30);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Delete";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_role_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_role_delete.Location = new System.Drawing.Point(705, 432);
+            this.btn_role_delete.Name = "btn_role_delete";
+            this.btn_role_delete.Size = new System.Drawing.Size(75, 30);
+            this.btn_role_delete.TabIndex = 6;
+            this.btn_role_delete.Text = "Delete";
+            this.btn_role_delete.UseVisualStyleBackColor = true;
+            this.btn_role_delete.Click += new System.EventHandler(this.btn_role_delete_Click);
+            // 
+            // role_id
+            // 
+            this.role_id.AutoSize = true;
+            this.role_id.Location = new System.Drawing.Point(678, 432);
+            this.role_id.Name = "role_id";
+            this.role_id.Size = new System.Drawing.Size(21, 20);
+            this.role_id.TabIndex = 4;
+            this.role_id.Text = "id";
+            this.role_id.Visible = false;
             // 
             // roleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 462);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.role_id);
+            this.Controls.Add(this.btn_role_delete);
+            this.Controls.Add(this.btn_role_clear);
+            this.Controls.Add(this.btn_role_save);
             this.Controls.Add(this.cb_group);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Group);
@@ -221,8 +236,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel flowgroup;
         private System.Windows.Forms.CheckBox cb_group;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btn_role_save;
+        private System.Windows.Forms.Button btn_role_clear;
+        private System.Windows.Forms.Button btn_role_delete;
+        private System.Windows.Forms.Label role_id;
     }
 }

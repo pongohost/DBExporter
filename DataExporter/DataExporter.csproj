@@ -53,7 +53,7 @@
     </Reference>
     <Reference Include="Plibs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Plibs\Plibs\bin\Debug\Plibs.dll</HintPath>
+      <HintPath>..\..\..\Plibs\Plibs\bin\Debug\Plibs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="auth.cs" />
     <Compile Include="DBConf.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +90,12 @@
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="logViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="logViewer.Designer.cs">
+      <DependentUpon>logViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -131,6 +138,9 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="logViewer.resx">
+      <DependentUpon>logViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="roleForm.resx">
       <DependentUpon>roleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagement.resx">
+      <DependentUpon>UserManagement.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
