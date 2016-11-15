@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using Plibs;
@@ -13,7 +7,7 @@ namespace DataExporter
 {
     public partial class DBConf : Form
     {
-        MainForm mf = new MainForm();
+        DataExport mf = new DataExport();
         
         public DBConf()
         {

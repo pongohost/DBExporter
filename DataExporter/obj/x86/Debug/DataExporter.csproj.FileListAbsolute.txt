@@ -48,7 +48,6 @@ Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExpor
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExporter.DBConf.resources
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExporter.FormAdmin.resources
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExporter.LoginForm.resources
-Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExporter.MainForm.resources
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExporter.nav_menu.resources
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExporter.Properties.Resources.resources
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExporter.QueryManagement.resources
@@ -57,3 +56,8 @@ Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExpor
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\bin\Debug\Plibs.dll
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExporter.UserManagement.resources
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExporter.logViewer.resources
+Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\bin\Debug\MetroFramework.dll
+Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\bin\Debug\ObjectListView.dll
+Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Debug\DataExporter.DataExport.resources
+Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\bin\Debug\MetroFramework.Design.dll
+Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\bin\Debug\MetroFramework.Fonts.dll

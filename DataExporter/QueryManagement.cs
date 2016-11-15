@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using Plibs;
@@ -17,6 +12,8 @@ namespace DataExporter
         int urut=1;
         String[] listParam = new String[20];
         public Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
+        String namaModul = "Query Management";
+        String[] nett = bantu.GetLocalIPAddress();
         public QueryManagement()
         {
             InitializeComponent();
@@ -209,8 +206,10 @@ namespace DataExporter
             String idx = "";
             if (query_id.Text != "id")
                 idx = ", @id =" + query_id.Text;
-            //Console.WriteLine("EXEC insertQuery @query = '" + in_query.Text + "', @aktif = " + cb_query.Checked + ", @titel = '" + in_query_title.Text + "', @param = '" + newparam + "'" + idx);
-            MsSQL.kuerisql("EXEC insertQuery @query = '" + in_query.Text + "', @aktif = " + cb_query.Checked + ", @titel = '" + in_query_title.Text + "', @param = '" + newparam + "'" + idx, "Simpan Permission", "Simpan Data Berhasil");
+            String sql = "EXEC insertQuery @query = '" + in_query.Text + "', @aktif = " + cb_query.Checked + ", @titel = '" + in_query_title.Text + "', @param = '" + newparam + "'" + idx;
+            //Console.WriteLine(sql);
+            MsSQL.kuerisql(sql, "Simpan Permission", "Simpan Data Berhasil");
+            MsSQL.insertLog(auth.authID,namaModul,"Menyimpan data SQL = "+sql,nett[0],nett[1],auth.LogId);
             loadgridquerylist();
         }
 
@@ -228,7 +227,9 @@ namespace DataExporter
         {
             if (query_id.Text != "id")
             {
-                MsSQL.kuerisql("DELETE from tQuery WHERE id = '" + query_id.Text + "'", "Hapus Group", "Hapus Data Berhasil");
+                String sql = "DELETE from tQuery WHERE id = '" + query_id.Text + "'";
+                MsSQL.kuerisql(sql, "Hapus Group", "Hapus Data Berhasil");
+                MsSQL.insertLog(auth.authID, namaModul, "Menyimpan data SQL = " + sql, nett[0], nett[1], auth.LogId);
                 loadgridquerylist();
             }
         }

@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Reflection;
-using System.IO;
 using Plibs;
 using ClosedXML.Excel;
 using DotLiquid;
+using WeifenLuo.WinFormsUI.Docking;
+using MetroFramework.Controls;
 
 namespace DataExporter
 {
-    public partial class MainForm : Form
+    public partial class DataExport : DockContent
     {
         public Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
+        String namaModul = "Data Export";
+        String[] nett = bantu.GetLocalIPAddress();
         String mainsql="";
         DataTable dTable,dGridTable;
-        public MainForm()
+        public DataExport()
         {
             InitializeComponent();           
             Shown +=new EventHandler(MainForm_Load);
@@ -31,26 +31,6 @@ namespace DataExporter
             MsSQL.setpar(config.AppSettings.Settings["dbserver"].Value, config.AppSettings.Settings["dbinit"].Value, enc2.DecryptStringAES(config.AppSettings.Settings["dbuser"].Value, "roniGanteng"), enc2.DecryptStringAES(config.AppSettings.Settings["dbpass"].Value, "roniGanteng"));
             MsSQL.setconnection();
             loadcomboquery();
-        }
-
-        private void createconfig()
-        {
-            /*string loc = String.Concat(Assembly.GetEntryAssembly().Location,".config");
-            if (!File.Exists(loc))
-            {
-                System.Text.StringBuilder sb = new StringBuilder();
-                sb.AppendLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
-                sb.AppendLine("<configuration>");
-                sb.AppendLine("<appSettings>");
-                sb.AppendLine("<add key=\"dbserver\" value=\"\" />");
-                sb.AppendLine("<add key=\"dbport\" value=\"\" />");
-                sb.AppendLine("<add key=\"dbuser\" value=\"\" />");
-                sb.AppendLine("<add key=\"dbpass\" value=\"\" />");
-                sb.AppendLine("<add key=\"dbinit\" value=\"\" />");
-                sb.AppendLine("</appSettings>");
-                sb.AppendLine("</configuration>");
-                System.IO.File.WriteAllText(loc, sb.ToString());
-            }*/
         }
 
         private void dBToolStripMenuItem_Click(object sender, EventArgs e)
@@ -79,15 +59,15 @@ namespace DataExporter
 
         private void loadcomboquery()
         {
-            String sql = "SELECT id,title from tQuery where isActive = 1";
+            String sql = "EXEC getListQuery '"+auth.authID+"'";
             DataSet ds = MsSQL.dgsql(sql);
-            bantu.addComboItem(cb_query, ds);
+            bantu.addComboItem(cb_query2, ds);
         }
-
+                
         private void cb_query_SelectionChangeCommitted(object sender, EventArgs e)
         {
             clearlayout();
-            String sql = "SELECT jenis,label,nilai,nama from tParameter where parent_id = '" + cb_query.SelectedValue.ToString()+"'";
+            String sql = "SELECT jenis,label,nilai,nama from tParameter where parent_id = '" + cb_query2.SelectedValue.ToString()+"'";
             DataSet ds = MsSQL.dgsql(sql);
             int lbl = 0;
             dTable = ds.Tables[0];
@@ -95,8 +75,9 @@ namespace DataExporter
             {
                 foreach (DataRow row in table.Rows)
                 {
-                    Label a = new Label();
-                    a = new Label();
+                    MetroLabel a = new MetroLabel();
+                    //Label a = new Label();
+                    //a = new Label();
                     a.Name = "label" + lbl;
                     a.Text = row[1].ToString() + " :";
                     a.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -104,14 +85,16 @@ namespace DataExporter
                     flow_holder.Controls.Add(a);
                     if (row[0].ToString() == "TextBox")
                     {
-                        TextBox b = new TextBox();
+                        MetroTextBox b = new MetroTextBox();
+                        //TextBox b = new TextBox();
                         b.Name = row[3].ToString();
                         b.Size = new System.Drawing.Size(240, 26);
                         flow_holder.Controls.Add(b);
                     }
                     if (row[0].ToString() == "DropDown")
                     {
-                        ComboBox b = new ComboBox();
+                        MetroComboBox b = new MetroComboBox();
+                        //ComboBox b = new ComboBox();
                         b.Name = row[3].ToString();
                         b.Size = new System.Drawing.Size(240, 26);
                         b.DropDownHeight = 250;
@@ -148,13 +131,13 @@ namespace DataExporter
                 {
                     if (row[0].ToString() == "TextBox")
                     {
-                        ((TextBox)flow_holder.Controls[row[3].ToString()]).Dispose();
+                        ((MetroTextBox)flow_holder.Controls[row[3].ToString()]).Dispose();
                     }
                     if (row[0].ToString() == "DropDown")
                     {
-                        ((ComboBox)flow_holder.Controls[row[3].ToString()]).Dispose();
+                        ((MetroComboBox)flow_holder.Controls[row[3].ToString()]).Dispose();
                     }
-                    ((Label)flow_holder.Controls["label" + i]).Dispose(); 
+                    ((MetroLabel)flow_holder.Controls["label" + i]).Dispose(); 
                     i++;
                 }
             }
@@ -168,17 +151,18 @@ namespace DataExporter
             {
                 if (row[0].ToString() == "TextBox")
                 {
-                    s = ((TextBox)flow_holder.Controls[row[3].ToString()]).Text;
+                    s = ((MetroTextBox)flow_holder.Controls[row[3].ToString()]).Text;
                 }
                 if (row[0].ToString() == "DropDown")
                 {
-                    s = ((ComboBox)flow_holder.Controls[row[3].ToString()]).Text;
+                    s = ((MetroComboBox)flow_holder.Controls[row[3].ToString()]).Text;
                 }
                 filter.Add(row[3].ToString(), s);
-                Console.WriteLine(s);
+                //Console.WriteLine(s);
             }
-            String sql = "SELECT query from tQuery where id = '" + cb_query.SelectedValue.ToString() + "'";
+            String sql = "SELECT query from tQuery where id = '" + cb_query2.SelectedValue.ToString() + "'";
             DataSet ds = MsSQL.dgsql(sql);
+            MsSQL.insertLog(auth.authID, namaModul, "Load Report = '" + cb_query2.Text + "' Query = " + sql, nett[0], nett[1], auth.LogId);
             //Console.WriteLine(ds.Tables[0].Rows[0][0].ToString());
             Template template = Template.Parse(ds.Tables[0].Rows[0][0].ToString());
             Dictionary<string, object> filterdict = filter.ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value);
@@ -188,7 +172,6 @@ namespace DataExporter
             dGridTable = ds2.Tables[0];
             gv_data.DataSource = dGridTable;
             gv_data.Refresh();
-
         }
 
         private void btn_excel_Click(object sender, EventArgs e)
@@ -199,6 +182,7 @@ namespace DataExporter
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             //var path = System.Windows.Forms.Application.ExecutablePath + "HelloWorld.xlsx";
+            MsSQL.insertLog(auth.authID, namaModul, "Export Excel = '" + cb_query2.Text + "' ", nett[0], nett[1], auth.LogId);
             String filePath = saveFileDialog.FileName;
             XLWorkbook wb = new XLWorkbook();
             wb.Worksheets.Add(dGridTable);

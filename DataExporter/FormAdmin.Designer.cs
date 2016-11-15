@@ -53,7 +53,9 @@
             this.IsMdiContainer = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormAdmin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormAdmin";
+            this.Shown += new System.EventHandler(this.form_on_Load);
             this.ResumeLayout(false);
 
         }

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using Plibs;
@@ -17,6 +12,8 @@ namespace DataExporter
         int urut = 1;
         String[] listParam = new String[20];
         public Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
+        String namaModul = "User Management";
+        String[] nett = bantu.GetLocalIPAddress();
         public UserManagement()
         {
             InitializeComponent();
@@ -155,9 +152,11 @@ namespace DataExporter
             } else
             {
                 kunci = "";
-            }
-            Console.WriteLine("EXEC insertUser @name = '" + in_user_name.Text + "', @pass = '" + kunci + "', @perm = '" + newparam + "'");
-            MsSQL.kuerisql("EXEC insertUser @name = '" + in_user_name.Text + "', @pass = '" + kunci + "', @perm = '" + newparam + "'", "Simpan Permission", "Simpan Data Berhasil");
+            }            
+            String sql = "EXEC insertUser @name = '" + in_user_name.Text + "', @pass = '" + kunci + "', @perm = '" + newparam + "'";
+            Console.WriteLine(sql);
+            MsSQL.kuerisql(sql, "Simpan Permission", "Simpan Data Berhasil");
+            MsSQL.insertLog(auth.authID, namaModul, "Menyimpan data SQL = " + sql, nett[0], nett[1], auth.LogId);
             loadgridUserlist();
         }
 
@@ -175,7 +174,9 @@ namespace DataExporter
         {
             if (in_user_name.Text.Length > 0)
             {
-                MsSQL.kuerisql("DELETE from tUser WHERE username = '" + in_user_name.Text + "'", "Hapus User", "Hapus User Berhasil");
+                String sql = "DELETE from tUser WHERE username = '" + in_user_name.Text + "'";
+                MsSQL.kuerisql(sql, "Hapus User", "Hapus User Berhasil");
+                MsSQL.insertLog(auth.authID, namaModul, "Menghapus data SQL = " + sql, nett[0], nett[1], auth.LogId);
                 loadgridUserlist();
             }
         }

@@ -51,6 +51,19 @@
     <Reference Include="IKVM.OpenJDK.Core">
       <HintPath>..\IKVM.OpenJDK.Core.dll</HintPath>
     </Reference>
+    <Reference Include="MetroFramework, Version=1.3.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="ObjectListView">
+      <HintPath>..\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="Plibs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Plibs\Plibs\bin\Debug\Plibs.dll</HintPath>
@@ -97,11 +110,11 @@
     <Compile Include="logViewer.Designer.cs">
       <DependentUpon>logViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="DataExport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="DataExport.Designer.cs">
+      <DependentUpon>DataExport.cs</DependentUpon>
     </Compile>
     <Compile Include="nav_menu.cs">
       <SubType>Form</SubType>
@@ -141,8 +154,8 @@
     <EmbeddedResource Include="logViewer.resx">
       <DependentUpon>logViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="DataExport.resx">
+      <DependentUpon>DataExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="nav_menu.resx">
       <DependentUpon>nav_menu.cs</DependentUpon>
@@ -194,6 +207,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FirstPage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LastPage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Prev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud-download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

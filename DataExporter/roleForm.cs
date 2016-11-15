@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Plibs;
 using WeifenLuo.WinFormsUI.Docking;
@@ -16,6 +10,8 @@ namespace DataExporter
     public partial class roleForm : DockContent
     {
         public Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
+        String namaModul = "Role Management";
+        String[] nett = bantu.GetLocalIPAddress();
         int urut = 1;
         String[] listParam = new String[20];
         public roleForm()
@@ -156,7 +152,9 @@ namespace DataExporter
             String idx = "";
             if (role_id.Text != "id")
                 idx = ", @id =" + role_id.Text;
-            MsSQL.kuerisql("EXEC insertPerm @name = '"+ in_groupname.Text + "', @aktif = "+ cb_group.Checked + ", @cttn = '"+ in_groupnote.Text + "', @perm = '"+newparam+"'"+idx,"Simpan Permission","Simpan Data Berhasil");
+            String sql = "EXEC insertPerm @name = '" + in_groupname.Text + "', @aktif = " + cb_group.Checked + ", @cttn = '" + in_groupnote.Text + "', @perm = '" + newparam + "'" + idx;
+            MsSQL.kuerisql(sql,"Simpan Permission","Simpan Data Berhasil");
+            MsSQL.insertLog(auth.authID, namaModul, "Menyimpan data SQL = " + sql, nett[0], nett[1], auth.LogId);
             loadgridquerylist();
         }
 
@@ -173,7 +171,9 @@ namespace DataExporter
         {
             if (role_id.Text != "id")
             {
-                MsSQL.kuerisql("DELETE from tGroup WHERE id = '" + role_id.Text + "'", "Hapus Group", "Hapus Data Berhasil");
+                String sql = "DELETE from tGroup WHERE id = '" + role_id.Text + "'";
+                MsSQL.kuerisql(sql, "Hapus Group", "Hapus Data Berhasil");
+                MsSQL.insertLog(auth.authID, namaModul, "Menghapus data SQL = " + sql, nett[0], nett[1], auth.LogId);
                 loadgridquerylist();
             }
         }

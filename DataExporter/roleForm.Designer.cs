@@ -177,13 +177,15 @@
             // 
             // btn_role_delete
             // 
+            this.btn_role_delete.BackColor = System.Drawing.Color.Maroon;
             this.btn_role_delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_role_delete.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btn_role_delete.Location = new System.Drawing.Point(705, 432);
             this.btn_role_delete.Name = "btn_role_delete";
             this.btn_role_delete.Size = new System.Drawing.Size(75, 30);
             this.btn_role_delete.TabIndex = 6;
             this.btn_role_delete.Text = "Delete";
-            this.btn_role_delete.UseVisualStyleBackColor = true;
+            this.btn_role_delete.UseVisualStyleBackColor = false;
             this.btn_role_delete.Click += new System.EventHandler(this.btn_role_delete_Click);
             // 
             // role_id

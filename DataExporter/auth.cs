@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataExporter
 {
     public static class auth
     {
         static String _authId;
+        static String _authName;
+        static int _logId;
         public static String authID
         {
             get
@@ -18,6 +16,32 @@ namespace DataExporter
             set
             {
                 _authId = value;
+            }
+        }
+
+        public static string AuthName
+        {
+            get
+            {
+                return _authName;
+            }
+
+            set
+            {
+                _authName = value;
+            }
+        }
+
+        public static int LogId
+        {
+            get
+            {
+                return _logId;
+            }
+
+            set
+            {
+                _logId = value;
             }
         }
     }
