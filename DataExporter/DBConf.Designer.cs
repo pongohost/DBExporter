@@ -48,7 +48,7 @@
             this.btn_sqltest.Location = new System.Drawing.Point(173, 166);
             this.btn_sqltest.Name = "btn_sqltest";
             this.btn_sqltest.Size = new System.Drawing.Size(75, 30);
-            this.btn_sqltest.TabIndex = 21;
+            this.btn_sqltest.TabIndex = 7;
             this.btn_sqltest.Text = "Test";
             this.btn_sqltest.UseVisualStyleBackColor = true;
             this.btn_sqltest.Click += new System.EventHandler(this.btn_sqltest_Click);
@@ -59,7 +59,7 @@
             this.in_setdb.Location = new System.Drawing.Point(92, 134);
             this.in_setdb.Name = "in_setdb";
             this.in_setdb.Size = new System.Drawing.Size(194, 26);
-            this.in_setdb.TabIndex = 26;
+            this.in_setdb.TabIndex = 5;
             this.in_setdb.Text = "DB Name";
             // 
             // label20
@@ -78,7 +78,7 @@
             this.btn_setdbsave.Location = new System.Drawing.Point(92, 166);
             this.btn_setdbsave.Name = "btn_setdbsave";
             this.btn_setdbsave.Size = new System.Drawing.Size(75, 30);
-            this.btn_setdbsave.TabIndex = 23;
+            this.btn_setdbsave.TabIndex = 6;
             this.btn_setdbsave.Text = "Save";
             this.btn_setdbsave.UseVisualStyleBackColor = true;
             this.btn_setdbsave.Click += new System.EventHandler(this.btn_setdbsave_Click);
@@ -100,7 +100,7 @@
             this.in_setdbpass.Name = "in_setdbpass";
             this.in_setdbpass.PasswordChar = '*';
             this.in_setdbpass.Size = new System.Drawing.Size(194, 26);
-            this.in_setdbpass.TabIndex = 22;
+            this.in_setdbpass.TabIndex = 4;
             this.in_setdbpass.Text = "roni";
             // 
             // label10
@@ -119,7 +119,7 @@
             this.in_setdbuser.Location = new System.Drawing.Point(92, 70);
             this.in_setdbuser.Name = "in_setdbuser";
             this.in_setdbuser.Size = new System.Drawing.Size(194, 26);
-            this.in_setdbuser.TabIndex = 19;
+            this.in_setdbuser.TabIndex = 3;
             this.in_setdbuser.Text = "sa";
             // 
             // label9
@@ -138,7 +138,7 @@
             this.in_setdbport.Location = new System.Drawing.Point(92, 38);
             this.in_setdbport.Name = "in_setdbport";
             this.in_setdbport.Size = new System.Drawing.Size(194, 26);
-            this.in_setdbport.TabIndex = 17;
+            this.in_setdbport.TabIndex = 2;
             this.in_setdbport.Text = "1433";
             // 
             // label8
@@ -157,7 +157,7 @@
             this.in_setdbserver.Location = new System.Drawing.Point(92, 6);
             this.in_setdbserver.Name = "in_setdbserver";
             this.in_setdbserver.Size = new System.Drawing.Size(194, 26);
-            this.in_setdbserver.TabIndex = 15;
+            this.in_setdbserver.TabIndex = 1;
             this.in_setdbserver.Text = "localhost";
             // 
             // DBConf
@@ -203,6 +203,5 @@
         private System.Windows.Forms.TextBox in_setdbport;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox in_setdbserver;
-
     }
 }

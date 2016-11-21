@@ -18,7 +18,7 @@ namespace DataExporter
         public Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
         String namaModul = "Data Export";
         String[] nett = bantu.GetLocalIPAddress();
-        String mainsql="";
+        //String mainsql="";
         DataTable dTable,dGridTable;
         public DataExport()
         {
@@ -28,8 +28,8 @@ namespace DataExporter
 
         private void MainForm_Load(object sender, EventArgs e)
         { 
-            MsSQL.setpar(config.AppSettings.Settings["dbserver"].Value, config.AppSettings.Settings["dbinit"].Value, enc2.DecryptStringAES(config.AppSettings.Settings["dbuser"].Value, "roniGanteng"), enc2.DecryptStringAES(config.AppSettings.Settings["dbpass"].Value, "roniGanteng"));
-            MsSQL.setconnection();
+            //MsSQL.setpar(config.AppSettings.Settings["dbserver"].Value, config.AppSettings.Settings["dbinit"].Value, enc2.DecryptStringAES(config.AppSettings.Settings["dbuser"].Value, "roniGanteng"), enc2.DecryptStringAES(config.AppSettings.Settings["dbpass"].Value, "roniGanteng"));
+            //MsSQL.setconnection();
             loadcomboquery();
         }
 
@@ -91,7 +91,7 @@ namespace DataExporter
                         b.Size = new System.Drawing.Size(240, 26);
                         flow_holder.Controls.Add(b);
                     }
-                    if (row[0].ToString() == "DropDown")
+                    if (row[0].ToString() == "Drop Down")
                     {
                         MetroComboBox b = new MetroComboBox();
                         //ComboBox b = new ComboBox();
@@ -114,6 +114,10 @@ namespace DataExporter
                                 b.Items.Add(isi[i]);
                             }
                         }
+                        else
+                        {
+                            b.Items.Add("Wrong Default Value");
+                        }
                         flow_holder.Controls.Add(b);
                     }
                     lbl++;
@@ -133,7 +137,7 @@ namespace DataExporter
                     {
                         ((MetroTextBox)flow_holder.Controls[row[3].ToString()]).Dispose();
                     }
-                    if (row[0].ToString() == "DropDown")
+                    if (row[0].ToString() == "Drop Down")
                     {
                         ((MetroComboBox)flow_holder.Controls[row[3].ToString()]).Dispose();
                     }
@@ -153,7 +157,7 @@ namespace DataExporter
                 {
                     s = ((MetroTextBox)flow_holder.Controls[row[3].ToString()]).Text;
                 }
-                if (row[0].ToString() == "DropDown")
+                if (row[0].ToString() == "Drop Down")
                 {
                     s = ((MetroComboBox)flow_holder.Controls[row[3].ToString()]).Text;
                 }

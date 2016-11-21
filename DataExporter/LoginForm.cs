@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using Plibs;
@@ -31,15 +26,18 @@ namespace DataExporter
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            MsSQL.setpar(config.AppSettings.Settings["dbserver"].Value, config.AppSettings.Settings["dbinit"].Value, enc2.DecryptStringAES(config.AppSettings.Settings["dbuser"].Value, "roniGanteng"), enc2.DecryptStringAES(config.AppSettings.Settings["dbpass"].Value, "roniGanteng"));
-            MsSQL.setconnection();
+            initDBConn();
+        }
+
+        private void initDBConn()
+        {
+            MsSQL.setpar(config.AppSettings.Settings["dbserver"].Value, config.AppSettings.Settings["dbinit"].Value, enc2.DecryptStringAES(config.AppSettings.Settings["dbuser"].Value, "roniGanteng"), enc2.DecryptStringAES(config.AppSettings.Settings["dbpass"].Value, "roniGanteng"), config.AppSettings.Settings["dbport"].Value);
+            MsSQL.setconnection();            
         }
 
         private void btn_close_Click(object sender, EventArgs e)
         {
             Application.Exit();
-            //MessageBox.Show( bantu.GetLocalIPAddress());
-            //MessageBox.Show(auth.authID);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -54,36 +52,39 @@ namespace DataExporter
         {
             if (txt_user.Text.Length >= 2 && txt_pass.Text.Length >= 2)
             {
+                //initDBConn();
                 String kunci = enc.encstr(txt_user.Text + txt_pass.Text);
                 String[] hostname = bantu.GetLocalIPAddress();
                 String sql = "EXEC LogIn @name = '" + txt_user.Text + "',@pass = '" + kunci.Substring(0, kunci.Length - 5) + "%',@ip = '" +hostname[0]+ "',@hostn = '" + hostname[1] + "'";
                 Console.WriteLine(sql);
                 DataSet ds = MsSQL.dgsql(sql);
-                if (ds.Tables[0].Rows.Count > 0)
+                if (bantu.cekError(ds))
                 {
-                    //auth.authID = ds.Tables[0].Rows[0][0].ToString();
-                    auth.authID = txt_user.Text;
-                    //auth.AuthName = txt_user.Text;
-                    auth.LogId = Convert.ToInt32(ds.Tables[1].Rows[0][0].ToString());
+                    if (ds.Tables[0].Rows.Count > 0)
+                    { 
+                        auth.authID = txt_user.Text;
+                        auth.LogId = Convert.ToInt32(ds.Tables[1].Rows[0][0].ToString());
 
-                    if (ds.Tables[0].Rows[0][1].ToString() == "1")
-                    {       
-                        fa.ChangeAdmin();
-                        this.Close();
+                        if (ds.Tables[0].Rows[0][1].ToString() == "1")
+                        {
+                            fa.ChangeAdmin();
+                            this.Close();
+                        }
+
+                        if (ds.Tables[0].Rows[0][1].ToString() == "2")
+                        {
+                            fa.ChangeUser();
+                            this.Close();
+                        }
                     }
-
-                    if (ds.Tables[0].Rows[0][1].ToString() == "2")
+                    else
                     {
-                        fa.ChangeUser();
-                        this.Close();
+                        notification.Error("Can Not LogIn", "Wrong Username or PassWord");
                     }
-                } else
-                {
-                    notification.Error("Can Not LogIn", "Wrong Username or PassWord");
                 }
             }
 
 
-        }
+        }        
     }
 }

@@ -65,7 +65,6 @@
             this.txt_user.Name = "txt_user";
             this.txt_user.Size = new System.Drawing.Size(172, 27);
             this.txt_user.TabIndex = 2;
-            this.txt_user.Text = "burhan";
             // 
             // txt_pass
             // 
@@ -75,7 +74,6 @@
             this.txt_pass.PasswordChar = '*';
             this.txt_pass.Size = new System.Drawing.Size(172, 27);
             this.txt_pass.TabIndex = 3;
-            this.txt_pass.Text = "burhan";
             // 
             // btn_login
             // 

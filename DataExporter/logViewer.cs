@@ -3,7 +3,6 @@ using System.Configuration;
 using WeifenLuo.WinFormsUI.Docking;
 using Plibs;
 using System.Data;
-using BrightIdeasSoftware;
 
 namespace DataExporter
 {
@@ -12,7 +11,7 @@ namespace DataExporter
         public Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
         String namaModul = "Log Viewer";
         String[] nett = bantu.GetLocalIPAddress();
-        ObjectListView ListView;
+        //ObjectListView ListView;
         public logViewer()
         {
             InitializeComponent();
@@ -21,8 +20,8 @@ namespace DataExporter
         public void logViewer_load(object sender, EventArgs e)
         {
             cb_limit.SelectedIndex = 0;
-            MsSQL.setpar(config.AppSettings.Settings["dbserver"].Value, config.AppSettings.Settings["dbinit"].Value, enc2.DecryptStringAES(config.AppSettings.Settings["dbuser"].Value, "roniGanteng"), enc2.DecryptStringAES(config.AppSettings.Settings["dbpass"].Value, "roniGanteng"));
-            MsSQL.setconnection();
+            //MsSQL.setpar(config.AppSettings.Settings["dbserver"].Value, config.AppSettings.Settings["dbinit"].Value, enc2.DecryptStringAES(config.AppSettings.Settings["dbuser"].Value, "roniGanteng"), enc2.DecryptStringAES(config.AppSettings.Settings["dbpass"].Value, "roniGanteng"));
+            //MsSQL.setconnection();
             loadgridLoglist("",1,cb_limit.SelectedItem.ToString());
         }
 

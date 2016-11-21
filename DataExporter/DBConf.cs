@@ -31,12 +31,15 @@ namespace DataExporter
             mf.config.AppSettings.Settings["dbuser"].Value = enc2.EncryptStringAES(in_setdbuser.Text.ToString(), "roniGanteng");
             mf.config.AppSettings.Settings["dbpass"].Value = enc2.EncryptStringAES(in_setdbpass.Text.ToString(), "roniGanteng");
             mf.config.Save(ConfigurationSaveMode.Modified);
+
+            MsSQL.setpar(in_setdbserver.Text.ToString(), in_setdb.Text.ToString(), in_setdbuser.Text.ToString(), in_setdbpass.Text.ToString(), in_setdbport.Text.ToString());
+
             MessageBox.Show(this, "Configuration Saved", "Save Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btn_sqltest_Click(object sender, EventArgs e)
         {
-            MsSQL.tescon(in_setdbserver.Text, in_setdb.Text, in_setdbuser.Text, in_setdbpass.Text);
+            MsSQL.tescon(in_setdbserver.Text, in_setdb.Text, in_setdbuser.Text, in_setdbpass.Text, in_setdbport.Text);
         }
     }
 }
