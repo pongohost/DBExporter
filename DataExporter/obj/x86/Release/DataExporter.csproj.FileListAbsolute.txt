@@ -25,5 +25,4 @@ Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Release\DataExp
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Release\DataExporter.csproj.GenerateResource.Cache
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Release\DataExporter.exe
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Release\DataExporter.pdb
-Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\obj\x86\Release\DataExporter.csprojResolveAssemblyReference.cache
 Z:\Poject\VbProject\DataExporter\DBExporter\DataExporter\bin\Release\Plibs.dll

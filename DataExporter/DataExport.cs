@@ -123,7 +123,6 @@ namespace DataExporter
                     lbl++;
                 }
             }
-
         }
 
         private void clearlayout()
@@ -181,7 +180,7 @@ namespace DataExporter
         private void btn_excel_Click(object sender, EventArgs e)
         {
             saveFileDialog.ShowDialog();
-        }
+        }        
 
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
